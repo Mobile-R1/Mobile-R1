@@ -1,1 +1,1 @@
-ChineseSimpleVQA.github.io
+Mobile-R1.github.io
