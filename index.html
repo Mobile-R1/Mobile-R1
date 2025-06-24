@@ -178,7 +178,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           Vision language model-based mobile agents have gained the ability to not only understand complex instructions and mobile screenshots, but also optimize their action outputs via thinking and reasoning, benefiting from reinforcement learning, such as Group Relative Policy Optimization (GRPO). However, existing research centers on offline reinforcement learning training or online optimization using action-level rewards, which limits the agent's dynamic interaction with the environment. This often results in agents settling into local optima, thereby weakening their ability for exploration and error action correction. 
-          To address these challenges, we introduce an approach called Mobile-R1, which employs online reinforcement learning with task-level rewards for mobile agents. Our training framework consists of two stages: initial online training via action-level reward, followed by online training via task-level reward based on multi-turn trajectories. This strategy is designed to enhance the exploration and error correction capabilities of EurekaMove, leading to significant performance improvements. Moreover, we have collected a dataset with 16,825 high-quality manual annotations and established a new benchmark covering 20 Chinese applications and 862 instructions.
+          To address these challenges, we introduce an approach called <b>Mobile-R1</b>, which employs online reinforcement learning with task-level rewards for mobile agents. Our training framework consists of two stages: initial online training via action-level reward, followed by online training via task-level reward based on multi-turn trajectories. This strategy is designed to enhance the exploration and error correction capabilities of EurekaMove, leading to significant performance improvements. Moreover, we have collected a dataset with 24,521 high-quality manual annotations and established a new benchmark covering 28 Chinese applications and 1,510 instructions.
         </div>
       </div>
     </div>
@@ -207,31 +207,47 @@
   <h2 class="title is-1 mathvista_other">
     <span class="mathvista_other" style="vertical-align: middle">Eureka Move!</span>
   </h2>
-    <div>Our agent is capable of correcting itself from an incorrect state back to the correct action (calledthe eureka move)!
+    <div>
     <img src="inference-1.png" alt="grade-lv" style="width: 70%;"/>
+    <p>Our agent is capable of correcting itself from an incorrect state back to the correct action (called the eureka move)!</p>
     </div>
   </div>
 </section>
             
 <section class="section">
-  <div class="container">
+<div class="container">
 
 
 
+    <!-- Training Framework -->
+  <div class="columns is-centered">
+    <div class="column has-text-centered">
+      <h2 class="title is-3">Training Pipeline</h2>
+      <div class="box m-5">
+        <div class="content has-text-centered">
+          <img src="guimainpdf-1.png" alt="grade-lv" style="max-width: 70%;"/>
+          <p>Our training framework consists of three stages:</p>
+        </div>
+        <div class="content has-text-justified">
+          
+          <h4>Stage 1: Format Finetuning</h4>
+          <p>Initial format fine-tuning using our dataset.</p>
+          
+          <h4>Stage 2: Action-level Online Training</h4>
+          <p>Single-step GRPO training with action-level rewards to enhance the format compliance and click accuracy.</p>
 
-    <!-- Construction Pipeline -->
-    <div class="columns is-centered">
-      <div class="column has-text-centered">
-        <h2 class="title is-3">Training Pipeline</h2>
-        <div class="box m-5">
-          <div class="content has-text-centered">
-            <img src="guimainpdf-1.png" alt="grade-lv" style="max-width: 70%;"/>
-            <p>Mobile-R1 is trained in three stages.
-            </p> 
-          </div>
+          <h4>Stage 3: Task-level Online Training</h4>
+          <p>On-line training with task-level rewards based on multi-turn trajectories to improve the generalization ability.</p>
+      <h2 class="title is-3" style="text-align: center;">Action-Level & Task-Level Rewards</h2>
+          <!-- <p></p> -->
+          <figure style="text-align:center;">
+            <img src="./static/images/intro/reward_comparison.png" alt="Comparison of Action-Level and Task-Level Rewards" style="max-width: 80%;"/>
+          </figure>
+          <p>Figure (a) illustrates an action-induced agent that is encouraged to “think longer” before selecting a single-step action. In contrast, Figure (b) depicts an agent trained at the task-level rewards, which explores and adjusts its trajectory over multi-turn interactions with the environment.</p>
         </div>
       </div>
     </div>
+  </div>
 
     
 
@@ -250,9 +266,33 @@
         <h2 class="title is-3">Main Results</h2>
         <div class="box m-5">
           <div class="content has-text-centered">
-            <img src="result-gui.png" alt="grade-lv" style="max-width: 70%;"/>
+            <img src="./static/images/exp_results/results_main.png" alt="grade-lv" style="max-width: 70%;"/>
             <p>Static evaluation results of Mobile-R1.
             </p> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Construction Pipeline -->
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Case Study</h2>
+        <div class="box m-5">
+          <div class="content has-text-centered"></div>
+          <img src="./static/images/case.png" alt="grade-lv" style="max-width: 70%;" />
+          <p>Comparison of Mobile-R1 and Qwen2.5-VL-3B-Instruct</p>
+    
+          <div class="content has-text-justified">
+            <ul>
+              <p>Task: "Open Fliggy, enter the hotel package, enter the popular live broadcast, find Fliggy Super VIP, and
+                follow the anchor"</p>
+                <li>Qwen2.5-VL-3B-Instruct: Failed at the second step.</li>
+                <li>Mobile-R1: Successfully completed the whole task.</li>
+
+            </ul>
+            </p>
           </div>
         </div>
       </div>
@@ -278,6 +318,24 @@
     </div>
   </div>
 </section>
+
+
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Trajectory Dataset</h2>
+        <div class="box m-5">
+          <div class="content has-text-centered">
+            <img src="./static/images/data_gui.png" alt="grade-lv" style="max-width: 70%;"/>
+            <p>Static evaluation results of Mobile-R1.</p>
+            <img src="./static/images/data_stat.png" alt="grade-lv" style="max-width: 70%;"/>
+            <p>Distribution of trajectory length.</p> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
 
 <!-- </section>
